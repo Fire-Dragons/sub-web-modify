@@ -53,26 +53,33 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="远程配置:">
-                <el-select
-                    v-model="form.remoteConfig"
-                    allow-create
-                    filterable
-                    placeholder="请选择"
-                    style="width: 100%"
-                >
-                  <el-option-group
-                      v-for="group in options.remoteConfig"
-                      :key="group.label"
-                      :label="group.label"
-                  >
-                    <el-option
-                        v-for="item in group.options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                    ></el-option>
-                  </el-option-group>
-                </el-select>
+                  <el-row>
+                      <el-col :span="24">
+                        <el-select
+                            v-model="form.remoteConfig"
+                            allow-create
+                            filterable
+                            placeholder="请选择"
+                            style="width: 100%"
+                        >
+                          <el-option-group
+                              v-for="group in options.remoteConfig"
+                              :key="group.label"
+                              :label="group.label"
+                          >
+                            <el-option
+                                v-for="item in group.options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            ></el-option>
+                          </el-option-group>
+                        </el-select>
+                    </el-col>
+                    <el-col :span="4">
+                        <el-button type="primary" @click="loadRemoteConfig">查看配置</el-button>
+                    </el-col>
+                  </el-row>
               </el-form-item>
               <el-form-item label-width="0px">
                 <el-collapse>
@@ -467,13 +474,15 @@ export default {
           "自动判断客户端": "auto",
         },
         shortTypes: {
-          "v1.mk": "https://v1.mk/short",
-          "d1.mk": "https://d1.mk/short",
-          "dlj.tf": "https://dlj.tf/short",
-          "suo.yt": "https://suo.yt/short",
-          "sub.cm": "https://sub.cm/short",
+            "本机": this.getLocalShort(),
+          "v1.mk": "https://v1.mk",
+          "d1.mk": "https://d1.mk",
+          "dlj.tf": "https://dlj.tf",
+          "suo.yt": "https://suo.yt",
+          "sub.cm": "https://sub.cm",
         },
         customBackend: {
+            "本机": this.getLocalSub(),
           "肥羊增强型后端【vless reality+hy1+hy2】": "https://url.v1.mk",
           "肥羊备用后端【vless reality+hy1+hy2】": "https://sub.d1.mk",
           "つつ-多地防失联【负载均衡+国内优化】": "https://api.tsutsu.one",
@@ -483,6 +492,7 @@ export default {
           "sub作者&lhie1提供": "https://api.dler.io",
         },
         backendOptions: [
+            {value: this.getLocalSub()},
           {value: "https://url.v1.mk"},
           {value: "https://sub.d1.mk"},
           {value: "https://api.tsutsu.one"},
@@ -496,11 +506,11 @@ export default {
             label: "通用",
             options: [
               {
-                label: "默认",
+                label: "默认_ACL4SSR_Online_Full_NoAuto",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
               },
               {
-                label: "默认（自动测速）",
+                label: "默认（自动测速）_ACL4SSR_Online_Full_AdblockPlus",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini"
               },
               {
@@ -533,63 +543,63 @@ export default {
             label: "ACL规则",
             options: [
               {
-                label: "ACL_默认版",
+                label: "ACL_默认版_ACL4SSR_Online",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
               },
               {
-                label: "ACL_无测速版",
+                label: "ACL_无测速版_ACL4SSR_Online_NoAuto",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini"
               },
               {
-                label: "ACL_去广告版",
+                label: "ACL_去广告版_ACL4SSR_Online_AdblockPlus",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini"
               },
               {
-                label: "ACL_多国家版",
+                label: "ACL_多国家版_ACL4SSR_Online_MultiCountry",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_MultiCountry.ini"
               },
               {
-                label: "ACL_无Reject版",
+                label: "ACL_无Reject版_ACL4SSR_Online_NoReject",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini"
               },
               {
-                label: "ACL_无测速精简版",
+                label: "ACL_无测速精简版_ACL4SSR_Online_Mini_NoAuto",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini"
               },
               {
-                label: "ACL_全分组版",
+                label: "ACL_全分组版_ACL4SSR_Online_Full",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini"
               },
               {
-                label: "ACL_全分组谷歌版",
+                label: "ACL_全分组谷歌版_ACL4SSR_Online_Full_Google",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Google.ini"
               },
               {
-                label: "ACL_全分组多模式版",
+                label: "ACL_全分组多模式版_ACL4SSR_Online_Full_MultiMode",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_MultiMode.ini"
               },
               {
-                label: "ACL_全分组奈飞版",
+                label: "ACL_全分组奈飞版_ACL4SSR_Online_Full_Netflix",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini"
               },
               {
-                label: "ACL_精简版",
+                label: "ACL_精简版_ACL4SSR_Online_Mini",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini"
               },
               {
-                label: "ACL_去广告精简版",
+                label: "ACL_去广告精简版_ACL4SSR_Online_Mini_AdblockPlus",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
               },
               {
-                label: "ACL_Fallback精简版",
+                label: "ACL_Fallback精简版_ACL4SSR_Online_Mini_Fallback",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini"
               },
               {
-                label: "ACL_多国家精简版",
+                label: "ACL_多国家精简版_ACL4SSR_Online_Mini_MultiCountry",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiCountry.ini"
               },
               {
-                label: "ACL_多模式精简版",
+                label: "ACL_多模式精简版_ACL4SSR_Online_Mini_MultiMode",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini"
               }
             ]
@@ -889,9 +899,9 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: this.getUrlParam() == "" ? "https://url.v1.mk" : this.getUrlParam(),
-        shortType: "https://v1.mk/short",
-        remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini",
+        customBackend: this.getUrlParam() == "" ? this.getLocalSub() : this.getUrlParam(),
+        shortType: this.getLocalShort(),
+        remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
@@ -946,7 +956,7 @@ export default {
     this.isPC = this.$getOS().isPc;
   },
   mounted() {
-    this.tanchuang();
+    // this.tanchuang();
     this.form.clientType = "clash";
     this.getBackendVersion();
     this.anhei();
@@ -965,6 +975,12 @@ export default {
   methods: {
     selectChanged() {
       this.getBackendVersion();
+    },
+    getLocalSub() {
+      return window.location.origin+"/subcon"
+    },
+    getLocalShort() {
+      return window.location.origin+"/short"
     },
     getUrlParam() {
       let query = window.location.search.substring(1);
@@ -1010,7 +1026,7 @@ export default {
       }
     },
     tanchuang() {
-      this.$alert(`<div style="text-align:center;font-size:15px"><strong><span style="font-size:20px;color:red">apiurl.v1.mk已被蔷，请更换最新的url.v1.mk</span></strong></br><strong><span style="font-size:20px">本站官方TG交流群：</span><span><a href="https://t.me/feiyangdigital" target="_blank" style="color:red;font-size:20px;text-decoration:none">点击加入</a></span></strong></br><strong><span style="font-size:20px">IEPL高端机场（<span style="color:blue">原生支持各种流媒体</span>）：</span><span><a href="https://www.mcwy.org" style="color:red;font-size:20px;text-decoration:none">点击注册</a></span></strong></br><strong><span style="font-size:20px">奈飞、ChatGPT合租（<span style="color:blue">优惠码：feiyang</span>）：</span><span><a href="https://hezu.v1.mk/" style="color:red;font-size:20px;text-decoration:none">点击上车</a></span></strong></br><strong><span style="font-size:20px">IOS外区应用代购：</span><span><a href="https://fk.myue.club" style="color:red;font-size:20px;text-decoration:none">点击查看</a></span></strong></br>本站服务器赞助机场-牧场物语，是一家拥有BGP中继+IEPL企业级内网专线的高端机场，适合各个价位要求的用户，牧场物语采用最新的奈飞非自制剧解决方案，出口随机更换IP，确保尽可能的每个用户可以用上独立IP，以此来稳定解决奈飞非自制剧的封锁，并推出7*24小时奈飞非自制剧节点自动检测系统，用户再也不用自己手动一个个的乱试节点了，目前牧场的新加坡，台湾等节区域点均可做到24H稳定非自制剧观看！</br></div>`, '信息面板', {
+      this.$alert(`<div style="text-align:center;font-size:15px"><strong><span style="font-size:20px">本站官方TG交流群：</span><span><a href="https://t.me/feiyangdigital" target="_blank" style="color:red;font-size:20px;text-decoration:none">点击加入</a></span></strong></br><strong><span style="font-size:20px">IEPL高端机场（<span style="color:blue">原生支持各种流媒体</span>）：</span><span><a href="https://www.mcwy.org" style="color:red;font-size:20px;text-decoration:none">点击注册</a></span></strong></br><strong><span style="font-size:20px">奈飞、ChatGPT合租（<span style="color:blue">优惠码：feiyang</span>）：</span><span><a href="https://hezu.v1.mk/" style="color:red;font-size:20px;text-decoration:none">点击上车</a></span></strong></br><strong><span style="font-size:20px">IOS外区应用代购：</span><span><a href="https://fk.myue.club" style="color:red;font-size:20px;text-decoration:none">点击查看</a></span></strong></br>本站服务器赞助机场-牧场物语，是一家拥有BGP中继+IEPL企业级内网专线的高端机场，适合各个价位要求的用户，牧场物语采用最新的奈飞非自制剧解决方案，出口随机更换IP，确保尽可能的每个用户可以用上独立IP，以此来稳定解决奈飞非自制剧的封锁，并推出7*24小时奈飞非自制剧节点自动检测系统，用户再也不用自己手动一个个的乱试节点了，目前牧场的新加坡，台湾等节区域点均可做到24H稳定非自制剧观看！</br></div>`, '信息面板', {
         confirmButtonText: '确定',
         dangerouslyUseHTMLString: true,
         customClass: 'msgbox'
@@ -1163,7 +1179,7 @@ export default {
         data.append("shortKey", this.customShortSubUrl.trim().indexOf("http") < 0 ? this.customShortSubUrl.trim() : "");
       }
       this.$axios
-          .post(duan, data, {
+          .post(duan+'/short', data, {
             header: {
               "Content-Type": "application/form-data; charset=utf-8"
             }
@@ -1246,7 +1262,11 @@ export default {
           this.$message.error("请输入正确的订阅地址!");
           return;
         }
-        this.form.customBackend = url.origin
+        var customBackend = this.getLocalSub()
+        if (url.origin != window.location.origin){
+            customBackend = url.origin
+        }
+        this.form.customBackend = customBackend
         let param = new URLSearchParams(url.search);
         if (param.get("target")) {
           let target = param.get("target");
@@ -1409,6 +1429,9 @@ export default {
           .catch(() => {
             this.$message.error("请求SubConverter版本号返回数据失败，该后端不可用！");
           });
+    },
+    loadRemoteConfig() {
+        window.open(this.form.remoteConfig)
     }
   }
 };

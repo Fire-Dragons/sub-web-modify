@@ -894,8 +894,8 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: this.getUrlParam() == "" ? this.getLocalSub() : this.getUrlParam(),
-        shortType: this.getLocalSub(),
-        remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini",
+        shortType: this.getLocalShort(),
+        remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
@@ -1439,6 +1439,7 @@ export default {
   }
 };
 </script>
+
 
 
 

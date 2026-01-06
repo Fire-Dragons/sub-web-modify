@@ -478,7 +478,7 @@ export default {
           "自动判断客户端": "auto",
         },
         shortTypes: {
-            "本机": this.getLocalSub(),
+            "本机": this.getLocalShort(),
           "v1.mk": "https://v1.mk",
           "d1.mk": "https://d1.mk",
           "dlj.tf": "https://dlj.tf",
@@ -1439,6 +1439,7 @@ export default {
   }
 };
 </script>
+
 
 
 

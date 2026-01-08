@@ -1144,7 +1144,9 @@ export default {
           "&scv=" +
           this.form.scv.toString() +
           "&fdn=" +
-          this.form.fdn.toString();    
+          this.form.fdn.toString() +
+          "&upload=" +
+          this.form.upload.toString();    
       if (this.form.clientType.includes("surge")) {
         if (this.form.tpl.surge.doh === true) {
           this.customSubUrl += "&surge.doh=true";
@@ -1357,6 +1359,9 @@ export default {
         if (param.get("diyua")) {
           this.form.diyua = param.get("diyua");
         }
+        if (param.get("upload")) {
+          this.form.upload = param.get("upload") === 'true';
+        }
         this.dialogLoadConfigVisible = false;
         this.$message.success("长/短链接已成功解析为订阅信息");
       })();
@@ -1382,6 +1387,7 @@ export default {
       data.append("cdoh", encodeURIComponent(this.form.tpl.clash.doh.toString()));
       data.append("newname", encodeURIComponent(this.form.new_name.toString()));
       data.append("diyua", encodeURIComponent(this.form.diyua.toString()));
+      data.append("upload", encodeURIComponent(this.form.upload.toString()));
       return data;
     },
     confirmUploadScript() {
@@ -1441,7 +1447,6 @@ export default {
   }
 };
 </script>
-
 
 
 

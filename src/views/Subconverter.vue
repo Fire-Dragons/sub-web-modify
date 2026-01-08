@@ -180,9 +180,10 @@
                           </el-row>
                           <el-row :gutter="10">
                             <el-col :span="12">
-                              <div style="margin-left: 35%">
                                 <el-checkbox v-model="form.tpl.singbox.ipv6" label="Sing-Box支持IPV6"></el-checkbox>
-                              </div>
+                            </el-col>
+                            <el-col :span="12">
+                              <el-checkbox v-model="form.upload" label="自动上传"></el-checkbox>
                             </el-col>
                           </el-row>
                           <el-button slot="reference">更多选项</el-button>
@@ -915,7 +916,7 @@ export default {
         scv: false,
         fdn: false,
         appendType: false,
-        insert: false, // 是否插入默认订阅的节点，对应配置项 insert_url
+        insert: true, // 是否插入默认订阅的节点，对应配置项 insert_url
         new_name: true, // 是否使用 Clash 新字段
         tpl: {
           surge: {
@@ -927,7 +928,8 @@ export default {
           singbox: {
             ipv6: false
           }
-        }
+        },
+        upload: true
       },
       loading1: false,
       loading2: false,
@@ -1439,6 +1441,7 @@ export default {
   }
 };
 </script>
+
 
 
 

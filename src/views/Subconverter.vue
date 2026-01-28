@@ -498,6 +498,27 @@ export default {
         ],
         remoteConfig: [
           {
+            label: "个人合并规则",
+            options: [
+              {
+                label: "全国家",
+                value: "https://raw.githubusercontent.com/Fire-Dragons/ACL4SSR/main/ACL4SSR_Online_Full_Mannix.ini"
+              },
+              {
+                label: "全国家无DNS",
+                value: "https://raw.githubusercontent.com/Fire-Dragons/ACL4SSR/main/ACL4SSR_Online_Full_Mannix_No_DNS_Leak.ini"
+              },
+              {
+                label: "无国家",
+                value: "https://raw.githubusercontent.com/Fire-Dragons/ACL4SSR/main/ACL4SSR_Online_Mannix.ini"
+              },
+              {
+                label: "无国家无DNS",
+                value: "https://raw.githubusercontent.com/Fire-Dragons/ACL4SSR/main/ACL4SSR_Online_Mannix_No_DNS_Leak.ini"
+              }
+            ]
+          },
+          {
             label: "通用",
             options: [
               {
@@ -1447,6 +1468,7 @@ export default {
   }
 };
 </script>
+
 
 
 
